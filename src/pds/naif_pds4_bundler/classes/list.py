@@ -22,7 +22,7 @@ from ..utils import spice_exception_handler
 from .log import error_message
 
 
-class List():
+class List:
     """Class to generate the List.
 
     :param setup: NPB execution setup object
@@ -53,6 +53,12 @@ class KernelList(List):
 
     def __init__(self, setup: object):
         """Constructor."""
+        self.complete_list = None
+        self.list_name = None
+        self.kernel_list = None
+        self.json_formatted_lst = None
+        self.json_config = None
+        self.re_config = None
         line = f"Step {setup.step} - Kernel List generation"
         logging.info("")
         logging.info(line)

@@ -55,7 +55,7 @@ from .object import Object
 from .setup import Setup
 
 
-class Product():
+class Product:
     """Parent Class that defines a generic archive product (or file).
 
     Assigns value to the common attributes for all Products: file size,

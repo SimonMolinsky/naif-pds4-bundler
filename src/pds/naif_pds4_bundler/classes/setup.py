@@ -32,6 +32,20 @@ class Setup():
 
     def __init__(self, args: Object, version: str):
         """Constructor."""
+        self.lsk = None
+        self.sclks = None
+        self.fks = None
+        self.increment = None
+        self.current_release = None
+        self.release = None
+        self.xml_tab = None
+        self.template_files = None
+        self.templates_directory = None
+        self.information_model_float = None
+        self.schema_location = None
+        self.bundle_directory = None
+        self.xml_model = None
+        self.working_directory = None
         try:
             #
             # Check that the configuration file validates with its schema
@@ -309,7 +323,7 @@ class Setup():
         # Check binary kernels endianness.
         #
         if self.pds_version == '4':
-            if  self.kernel_endianness == "little":
+            if self.kernel_endianness == "little":
                 logging.info("-- Binary SPICE kernels expected to have LTL-IEEE (little endian) binary format.")
             else:
                 logging.info("-- Binary SPICE kernels expected to have BIG-IEEE (little endian) binary format.")
@@ -567,7 +581,7 @@ class Setup():
                 if config_schema < schemas_eval[i]:
                     try:
                         schema = schemas[i - 1]
-                    except:
+                    except Exception as _:
                         schema = schemas[0]
                 if config_schema >= schemas_eval[i]:
                     schema = schemas[i]
@@ -581,7 +595,6 @@ class Setup():
         #
         else:
             templates_directory = f"{self.root_dir}templates/pds3/"
-
 
         template_files = []
         if not hasattr(self, "templates_directory") and self.pds_version == "4":
@@ -657,7 +670,7 @@ class Setup():
                         if xml_tag in line:
                             line = line.rstrip()
                             xml_tab = len(line) - len(xml_tag)
-            except:
+            except Exception as _:
                 logging.warning("-- XML Template not found to determine XML Tab. It has been set to 2.")
                 xml_tab = 2
 

@@ -16,7 +16,7 @@ from ..utils import type_to_pds3_type
 from .log import error_message
 
 
-class PDSLabel():
+class PDSLabel:
     """Class to generate a PDS Label.
 
     :param setup: NPB execution Setup object
@@ -37,6 +37,7 @@ class PDSLabel():
 
         self.product = product
         self.setup = setup
+        self.name = None
 
         #
         # Fields from setup
@@ -646,6 +647,9 @@ class SpiceKernelPDS3Label(PDSLabel):
         """Constructor."""
         PDSLabel.__init__(self, mission, product)
 
+        self.NAIF_INSTRUMENT_ID = None
+        self.SPACECRAFT_CLOCK_STOP_COUNT = None
+        self.SPACECRAFT_CLOCK_START_COUNT = None
         self.template = (
             f"{self.setup.templates_directory}/template_product_spice_kernel.lbl"
         )
@@ -758,7 +762,7 @@ class SpiceKernelPDS3Label(PDSLabel):
         desc = ''
         line_len = 32
         for word in description:
-            if line_len + len(word + ' ') < 77 :
+            if line_len + len(word + ' ') < 77:
                 if not desc:
                     desc += '"' + word
                 else:

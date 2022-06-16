@@ -11,7 +11,7 @@ from .log import error_message
 from .product import PDS3DocumentProduct
 
 
-class Collection():
+class Collection:
     """Class to generate a PDS4 Collection.
 
     :param type: Collection type: kernels, documents or miscellaneous
@@ -28,6 +28,8 @@ class Collection():
         self.name = type
         self.setup = setup
         self.bundle = bundle
+        self.lid = None
+        self.vid = None
 
         #
         # To know whether if the collection has been updated or not.
